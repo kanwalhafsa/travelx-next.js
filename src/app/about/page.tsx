@@ -13,7 +13,7 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: "Sarah Johnson",
+      name: "Jack Johnson",
       role: "CEO & Founder",
       image: "/images/story1.jpg?height=300&width=300",
       bio: "Travel enthusiast with 20+ years in the industry",
@@ -25,7 +25,7 @@ export default function AboutPage() {
       bio: "Expert in travel logistics and customer experience",
     },
     {
-      name: "Emily Rodriguez",
+      name: "Alfie Rodriguez",
       role: "Travel Specialist",
       image: "/images/story3.jpg?height=300&width=300",
       bio: "Passionate about creating unforgettable journeys",
@@ -105,8 +105,8 @@ export default function AboutPage() {
                   has grown into one of the most trusted names in the travel industry.
                 </p>
                 <p>
-                  Over the years, we've helped more than 50,000 travelers explore 200+ destinations across the globe.
-                  From romantic getaways to family adventures, business trips to solo expeditions, we've been there
+                  Over the years, {"we've"} helped more than 50,000 travelers explore 200+ destinations across the globe.
+                  From romantic getaways to family adventures, business trips to solo expeditions, {"we've"} been there
                   every step of the way.
                 </p>
                 <p>
@@ -190,8 +190,8 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
           <p className="text-xl leading-relaxed">
-  {"To inspire and enable people to explore the world by providing exceptional travel experiences, personalized service, and innovative solutions that create lasting memories and meaningful connections."}
-</p>
+            {"To inspire and enable people to explore the world by providing exceptional travel experiences, personalized service, and innovative solutions that create lasting memories and meaningful connections."}
+          </p>
         </div>
       </section>
     </div>

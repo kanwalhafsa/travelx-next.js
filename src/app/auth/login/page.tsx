@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -49,7 +48,7 @@ export default function LoginPage() {
           variant: "destructive",
         })
       }
-    } catch (error) {
+    } catch (_) {
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
@@ -135,7 +134,7 @@ export default function LoginPage() {
           <Separator />
 
           <div className="text-center text-sm">
-            Don't have an account?{" "}
+            {"Don't"} have an account?{" "}
             <Link href="/auth/register" className="text-blue-600 hover:text-blue-500 font-medium">
               Sign up
             </Link>

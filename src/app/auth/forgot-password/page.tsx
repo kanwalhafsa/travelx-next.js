@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -44,7 +43,7 @@ export default function ForgotPasswordPage() {
           variant: "destructive",
         })
       }
-    } catch (error) {
+    } catch (_) {
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
@@ -64,11 +63,11 @@ export default function ForgotPasswordPage() {
               <Mail className="w-8 h-8 text-green-600" />
             </div>
             <CardTitle className="text-2xl font-bold">Check your email</CardTitle>
-            <CardDescription>We've sent a password reset link to {email}</CardDescription>
+            <CardDescription>{"We've"} sent a password reset link to {email}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-gray-600 text-center">
-              Didn't receive the email? Check your spam folder or try again.
+              {"Didn't"} receive the email? Check your spam folder or try again.
             </p>
             <Button
               onClick={() => {
@@ -100,7 +99,7 @@ export default function ForgotPasswordPage() {
             <span className="text-xl font-bold text-gray-900">TravelX</span>
           </div>
           <CardTitle className="text-2xl font-bold">Forgot your password?</CardTitle>
-          <CardDescription>Enter your email address and we'll send you a link to reset your password</CardDescription>
+          <CardDescription>Enter your email address and {"we'll"} send you a link to reset your password</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
