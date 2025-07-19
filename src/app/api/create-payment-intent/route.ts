@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
   try {
-    const { amount, currency = "usd", metadata } = await request.json()
+    const { amount, currency = "usd" } = await request.json()
 
     // Stripe integration ke liye ye code use kariye
     // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)

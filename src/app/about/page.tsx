@@ -190,9 +190,8 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
           <p className="text-xl leading-relaxed">
-            "To inspire and enable people to explore the world by providing exceptional travel experiences, personalized
-            service, and innovative solutions that create lasting memories and meaningful connections."
-          </p>
+  {"To inspire and enable people to explore the world by providing exceptional travel experiences, personalized service, and innovative solutions that create lasting memories and meaningful connections."}
+</p>
         </div>
       </section>
     </div>

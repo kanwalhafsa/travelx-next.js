@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     userStore.push(newUser)
 
     // Return success response (without password)
-    const { password: _, ...userWithoutPassword } = newUser
+    const { password: _password, ...userWithoutPassword } = newUser
     return NextResponse.json(
       {
         message: "User created successfully",
