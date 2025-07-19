@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Shield } from "lucide-react"
 
@@ -112,85 +112,109 @@ export default function PrivacyPage() {
               <p>We use cookies and similar technologies to:</p>
               <ul>
                 <li>Remember your preferences and settings</li>
-                <li>Analyze website traffic and usage patterns</li>
-                <li>Provide personalized content and advertisements</li>
-                <li>Improve website functionality and user experience</li>
+                <li>Analyze website performance and usage</li>
+                <li>Deliver personalized advertisements</li>
+                <li>Enable social media features</li>
               </ul>
               <p>
-                You can control cookie settings through your browser preferences, but some features may not work
-                properly if cookies are disabled.
+                You can manage your cookie preferences through your browser settings or our cookie consent tool.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>6. Your Rights and Choices</CardTitle>
+              <CardTitle>6. Children's Privacy</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
-              <p>You have the right to:</p>
+              // Test comment to verify file update
+              <p>
+                Our services are not intended for children under 13. We don&apos;t knowingly collect personal information from
+                children under 13. If we become aware of such collection, we will delete the information immediately.
+              </p>
+              <p>
+                If you&apos;re a parent or guardian and believe your child has provided us with personal information, please
+                contact us immediately.
+              </p>
+              <p>
+                We&apos;ll take prompt action to investigate and remove any such data from our systems.
+              </p>
+              <p>
+                It&apos;s our priority to ensure compliance with all applicable child protection laws.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>7. Your Rights</CardTitle>
+            </CardHeader>
+            <CardContent className="prose prose-gray max-w-none">
+              <p>Depending on your location, you may have the following rights regarding your personal information:</p>
               <ul>
-                <li>Access and review your personal information</li>
-                <li>Correct inaccurate or incomplete information</li>
-                <li>Delete your account and personal data</li>
-                <li>Opt-out of marketing communications</li>
-                <li>Request data portability</li>
-                <li>Object to certain processing activities</li>
+                <li>Access: Request a copy of your personal data</li>
+                <li>Correction: Request correction of inaccurate data</li>
+                <li>Deletion: Request deletion of your data</li>
+                <li>Restriction: Restrict how we process your data</li>
+                <li>Portability: Receive your data in a portable format</li>
+                <li>Objection: Object to certain types of processing, such as marketing</li>
               </ul>
               <p>
-                To exercise these rights, please contact us at privacy@travelx.com or through your account settings.
+                To exercise these rights, please contact us at <a href="mailto:privacy@travelapp.com">privacy@travelapp.com</a>.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>7. International Data Transfers</CardTitle>
+              <CardTitle>8. Third-Party Links</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
               <p>
-                Your information may be transferred to and processed in countries other than your own. We ensure
-                appropriate safeguards are in place to protect your data in accordance with applicable laws.
+                Our website may contain links to third-party websites. We are not responsible for the privacy practices or
+                content of these websites. We encourage you to review their privacy policies.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>8. Children's Privacy</CardTitle>
+              <CardTitle>9. International Data Transfers</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
               <p>
-                Our services are not intended for children under 13. We do not knowingly collect personal information
-                from children under 13. If we become aware of such collection, we will delete the information
-                immediately.
+                Your information may be transferred to and processed in countries other than your own. We ensure that such
+                transfers comply with applicable data protection laws.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>9. Changes to This Policy</CardTitle>
+              <CardTitle>10. Changes to This Privacy Policy</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
               <p>
-                We may update this Privacy Policy from time to time. We will notify you of any material changes by
-                posting the new policy on our website and updating the "Last Updated" date.
+                We may update this Privacy Policy from time to time. We will notify you of significant changes by posting
+                the updated policy on our website or by email.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>10. Contact Us</CardTitle>
+              <CardTitle>11. Contact Us</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
-              <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
-              <ul>
-                <li>Email: privacy@travelx.com</li>
-                <li>Phone: +1 (555) 123-4567</li>
-                <li>Address: 123 Travel Street, Adventure City, AC 12345</li>
-              </ul>
+              <p>
+                If you have questions or concerns about this Privacy Policy, please contact us at:
+              </p>
+              <p>
+                Email: <a href="mailto:support@travelapp.com">support@travelapp.com</a>
+              </p>
+              <p>
+                Address: Travel App Inc., 123 Adventure Lane, Suite 100, Wanderlust City, TX 12345
+              </p>
             </CardContent>
           </Card>
         </div>
