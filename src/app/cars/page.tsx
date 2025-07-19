@@ -25,6 +25,13 @@ interface CarRental {
   company: string
 }
 
+interface BookingData {
+  type: string
+  title: string
+  price: number
+  destination: string
+}
+
 export default function CarsPage() {
   const [cars, setCars] = useState<CarRental[]>([])
   const [loading, setLoading] = useState(false)
@@ -82,14 +89,19 @@ export default function CarsPage() {
   }
 
   const handleBookCar = (car: CarRental) => {
-    const bookingData = {
+    const bookingData: BookingData = {
       type: "car",
       title: `${car.name} - ${car.category}`,
       price: car.price,
       destination: searchForm.location,
     }
 
-    const params = new URLSearchParams(bookingData as any)
+    const params = new URLSearchParams({
+      type: bookingData.type,
+      title: bookingData.title,
+      price: bookingData.price.toString(),
+      destination: bookingData.destination,
+    })
     window.location.href = `/checkout?${params.toString()}`
   }
 

@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Plane, Twitter, Instagram, Mail, Phone, MapPin, Linkedin, Github } from "lucide-react"
+import { Plane, Twitter, Mail, Phone, MapPin, Linkedin, Github } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -42,7 +42,6 @@ export default function Footer() {
                   <Github className="w-5 h-5" />
                 </Link>
               </Button>
-              
             </div>
           </div>
 
@@ -135,7 +134,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">&copy; 2024 TravelX. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">© 2024 TravelX. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
                 Terms

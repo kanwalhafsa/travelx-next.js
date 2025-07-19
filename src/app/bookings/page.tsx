@@ -1,6 +1,7 @@
+
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,8 +10,9 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar, MapPin, Plane, Hotel, Car, Search, Download } from "lucide-react"
 import Link from "next/link"
-import type { JSX } from "react/jsx-runtime" // Import JSX to fix the undeclared variable error
+import type { JSX } from "react/jsx-runtime"
 import { useToast } from "@/hooks/use-toast"
+import Image from "next/image"
 
 interface Booking {
   id: string
@@ -36,15 +38,30 @@ export default function BookingsPage() {
   const [typeFilter, setTypeFilter] = useState("all")
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchBookings()
-  }, [])
+  const filterBookings = useCallback(() => {
+    let filtered = bookings
 
-  useEffect(() => {
-    filterBookings()
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (booking) =>
+          booking.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          booking.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          booking.bookingReference.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+    }
+
+    if (statusFilter !== "all") {
+      filtered = filtered.filter((booking) => booking.status === statusFilter)
+    }
+
+    if (typeFilter !== "all") {
+      filtered = filtered.filter((booking) => booking.type === typeFilter)
+    }
+
+    setFilteredBookings(filtered)
   }, [bookings, searchTerm, statusFilter, typeFilter])
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     try {
       // Mock bookings data
       const mockBookings: Booking[] = [
@@ -115,34 +132,19 @@ export default function BookingsPage() {
       ]
       setBookings(mockBookings)
       setLoading(false)
-    } catch (error) {
-      console.error("Failed to fetch bookings:", error)
+    } catch (err) {
+      console.error("Failed to fetch bookings:", err)
       setLoading(false)
     }
-  }
+  }, [])
 
-  const filterBookings = () => {
-    let filtered = bookings
+  useEffect(() => {
+    fetchBookings()
+  }, [fetchBookings])
 
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (booking) =>
-          booking.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          booking.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          booking.bookingReference.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
-    }
-
-    if (statusFilter !== "all") {
-      filtered = filtered.filter((booking) => booking.status === statusFilter)
-    }
-
-    if (typeFilter !== "all") {
-      filtered = filtered.filter((booking) => booking.type === typeFilter)
-    }
-
-    setFilteredBookings(filtered)
-  }
+  useEffect(() => {
+    filterBookings()
+  }, [filterBookings])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -250,7 +252,7 @@ export default function BookingsPage() {
                 onClick={() => {
                   toast({
                     title: "Export Started",
-                    description: "Your booking data is being exported. You'll receive an email shortly.",
+                    description: "Your booking data is being exported. You will receive an email shortly.",
                   })
                 }}
               >
@@ -303,7 +305,7 @@ function BookingsList({
         <CardContent className="p-12 text-center">
           <Plane className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No bookings found</h3>
-          <p className="text-gray-600 mb-6">You don't have any bookings matching the current filters.</p>
+          <p className="text-gray-600 mb-6">You do not have any bookings matching the current filters.</p>
           <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600">
             <Link href="/">Start Planning Your Trip</Link>
           </Button>
@@ -318,7 +320,7 @@ function BookingsList({
         <Card key={booking.id} className="hover:shadow-lg transition-shadow">
           <CardContent className="p-6">
             <div className="flex items-center space-x-4">
-              <img
+              <Image
                 src={booking.image || "/placeholder.svg"}
                 alt={booking.title}
                 className="w-20 h-20 rounded-lg object-cover"

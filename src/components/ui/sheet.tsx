@@ -1,3 +1,4 @@
+
 "use client"
 
 import type * as React from "react"
@@ -15,7 +16,6 @@ interface SheetContentProps {
 }
 
 interface SheetTriggerProps {
-  asChild?: boolean
   children: React.ReactNode
 }
 
@@ -28,7 +28,7 @@ const Sheet: React.FC<SheetProps> = ({ open, onOpenChange, children }) => {
   )
 }
 
-const SheetTrigger: React.FC<SheetTriggerProps> = ({ asChild, children }) => {
+const SheetTrigger: React.FC<SheetTriggerProps> = ({ children }) => {
   return <>{children}</>
 }
 

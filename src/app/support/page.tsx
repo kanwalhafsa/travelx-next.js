@@ -1,6 +1,5 @@
-"use client"
 
-import type React from "react"
+"use client"
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -130,7 +129,7 @@ export default function SupportPage() {
         priority: "",
         description: "",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to submit ticket. Please try again.",
@@ -158,7 +157,7 @@ export default function SupportPage() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Customer Support</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We're here to help! Get assistance with your bookings, travel questions, or any issues you may have.
+            {"We're here to help! Get assistance with your bookings, travel questions, or any issues you may have."}
           </p>
         </div>
 

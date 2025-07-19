@@ -268,7 +268,7 @@ export default function HelpPage() {
               </h2>
               <p className="text-gray-600">
                 {searchTerm
-                  ? `Results for "${searchTerm}"${selectedCategory ? ` in ${selectedCategory}` : ""}`
+                  ? `Results for &quot;${searchTerm}&quot;${selectedCategory ? ` in ${selectedCategory}` : ""}`
                   : selectedCategory
                     ? `Articles in ${selectedCategory}`
                     : "Most helpful articles from our community"}
@@ -307,7 +307,7 @@ export default function HelpPage() {
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No articles found</h3>
                 <p className="text-gray-600 mb-6">
-                  We couldn't find any articles matching your search. Try different keywords or browse by category.
+                  We couldn&apos;t find any articles matching your search. Try different keywords or browse by category.
                 </p>
                 <Button onClick={clearFilters} variant="outline" className="bg-transparent">
                   Clear Filters
@@ -320,7 +320,7 @@ export default function HelpPage() {
               <CardContent className="p-8 text-center">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Still need help?</h3>
                 <p className="text-gray-600 mb-6">
-                  Can't find what you're looking for? Our support team is ready to assist you.
+                  Can&apos;t find what you&apos;re looking for? Our support team is ready to assist you.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button className="bg-gradient-to-r from-blue-600 to-purple-600" asChild>

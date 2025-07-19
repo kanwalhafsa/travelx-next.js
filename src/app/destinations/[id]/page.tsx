@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -35,11 +35,7 @@ export default function DestinationDetailsPage() {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchDestination()
-  }, [params.id])
-
-  const fetchDestination = async () => {
+  const fetchDestination = useCallback(async () => {
     try {
       const destinationId = Number(params.id)
 
@@ -260,7 +256,7 @@ export default function DestinationDetailsPage() {
           rating: 4.9,
           reviews: 1876,
           description:
-            "The Maldives is a tropical paradise consisting of 1,190 coral islands scattered across the Indian Ocean. Known for its crystal-clear turquoise waters, pristine white sand beaches, and luxurious overwater bungalows, it's the perfect destination for romance, relaxation, and underwater adventures.",
+            "The Maldives is a tropical paradise consisting of 1,190 coral islands scattered across the Indian Ocean. Known for its crystal-clear turquoise waters, pristine white sand beaches, and luxurious overwater bungalows, it\'s the perfect destination for romance, relaxation, and underwater adventures.",
           category: "Beach",
           highlights: [
             "Crystal clear waters",
@@ -275,12 +271,10 @@ export default function DestinationDetailsPage() {
           bestTime: "November to April",
           duration: "5-7 days",
           gallery: [
-            
             "/images/maldives1.jpg?height=300&width=400&text=Overwater+Bungalows",
             "/images/maldives2.jpg?height=300&width=400&text=Crystal+Waters",
             "/images/maldives3.jpg?height=300&width=400&text=Coral+Reef",
             "/images/maldives4.jpg?height=300&width=400&text=Beach+Villa",
-           
           ],
         },
       }
@@ -294,7 +288,11 @@ export default function DestinationDetailsPage() {
       console.error("Failed to fetch destination:", error)
       setLoading(false)
     }
-  }
+  }, [params.id])
+
+  useEffect(() => {
+    fetchDestination()
+  }, [fetchDestination])
 
   const handleAddToWishlist = () => {
     setIsWishlisted(!isWishlisted)
@@ -306,14 +304,14 @@ export default function DestinationDetailsPage() {
 
   const handleBookNow = () => {
     if (destination) {
-      const bookingData = {
+      const bookingData: Record<string, string> = {
         type: "destination",
         title: `${destination.name}, ${destination.country}`,
         price: destination.price.replace("$", ""),
         destination: `${destination.name}, ${destination.country}`,
       }
 
-      const params = new URLSearchParams(bookingData as any)
+      const params = new URLSearchParams(bookingData)
       window.location.href = `/checkout?${params.toString()}`
     }
   }

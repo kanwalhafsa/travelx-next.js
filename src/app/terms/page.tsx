@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { FileText } from "lucide-react"
@@ -49,8 +50,7 @@ export default function TermsPage() {
 
               <h4>2.3 Pricing</h4>
               <p>
-                All prices are subject to change without notice until booking is confirmed. Prices include all
-                applicable taxes unless otherwise stated.
+                {"All prices are subject to change without notice until booking is confirmed. Prices include all applicable taxes unless otherwise stated."}
               </p>
             </CardContent>
           </Card>
@@ -93,8 +93,7 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
               <p>
-                TravelX acts as an intermediary between you and travel service providers. We are not liable for any
-                acts, errors, omissions, representations, warranties, breaches or negligence of any such suppliers.
+                {"TravelX acts as an intermediary between you and travel service providers. We are not liable for any acts, errors, omissions, representations, warranties, breaches or negligence of any such suppliers."}
               </p>
 
               <p>

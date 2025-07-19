@@ -1,6 +1,8 @@
+
+
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -47,11 +49,7 @@ export default function BookingDetailPage() {
   const [loading, setLoading] = useState(true)
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchBookingDetail()
-  }, [params.id])
-
-  const fetchBookingDetail = async () => {
+  const fetchBookingDetail = useCallback(async () => {
     try {
       const bookingId = params.id as string
 
@@ -66,7 +64,7 @@ export default function BookingDetailPage() {
           endDate: "2024-06-29",
           status: "confirmed",
           price: 2999,
-          image: "/images/tour2.jpg?height=300&width=400&text=Europe",
+          image: "/images/tour2.jpg?height=300&width=400",
           bookingReference: "TRX-PKG-001",
           passengers: 2,
           details: {
@@ -100,7 +98,7 @@ export default function BookingDetailPage() {
               date: "2024-06-20",
               activity: "Vatican City Tour",
               time: "10:00",
-              location: "St. Peter's Square",
+              location: "St. Peter&apos;s Square",
             },
           ],
         },
@@ -113,7 +111,7 @@ export default function BookingDetailPage() {
           endDate: "2024-07-20",
           status: "pending",
           price: 1899,
-          image: "/images/tokyo.jpg?height=300&width=400&text=Tokyo",
+          image: "/images/tokyo.jpg?height=300&width=400",
           bookingReference: "TRX-FLT-002",
           passengers: 1,
           details: {
@@ -154,7 +152,7 @@ export default function BookingDetailPage() {
           endDate: "2024-08-15",
           status: "completed",
           price: 1299,
-          image: "/images/bali1.jpg?height=300&width=400&text=Bali",
+          image: "/images/bali1.jpg?height=300&width=400",
           bookingReference: "TRX-HTL-003",
           passengers: 2,
           rooms: 1,
@@ -198,11 +196,15 @@ export default function BookingDetailPage() {
       }
 
       setLoading(false)
-    } catch (error) {
-      console.error("Failed to fetch booking detail:", error)
+    } catch (err) {
+      console.error("Failed to fetch booking detail:", err)
       setLoading(false)
     }
-  }
+  }, [params.id])
+
+  useEffect(() => {
+    fetchBookingDetail()
+  }, [fetchBookingDetail])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -258,7 +260,7 @@ export default function BookingDetailPage() {
       <div className="min-h-screen bg-gray-50 py-8 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Booking not found</h1>
-          <p className="text-gray-600 mb-6">The booking you're looking for doesn't exist or has been removed.</p>
+          <p className="text-gray-600 mb-6">The booking you&apos;re looking for does not exist or has been removed.</p>
           <Link href="/bookings">
             <Button>Back to Bookings</Button>
           </Link>

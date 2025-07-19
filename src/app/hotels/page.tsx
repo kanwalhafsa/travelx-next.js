@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react"
@@ -22,6 +23,13 @@ interface HotelType {
   image: string
   amenities: string[]
   description: string
+}
+
+interface BookingData {
+  type: string
+  title: string
+  price: number
+  destination: string
 }
 
 export default function HotelsPage() {
@@ -78,14 +86,19 @@ export default function HotelsPage() {
   }
 
   const handleBookHotel = (hotel: HotelType) => {
-    const bookingData = {
+    const bookingData: BookingData = {
       type: "hotel",
       title: hotel.name,
       price: hotel.price,
       destination: hotel.location,
     }
 
-    const params = new URLSearchParams(bookingData as any)
+    const params = new URLSearchParams({
+      type: bookingData.type,
+      title: bookingData.title,
+      price: bookingData.price.toString(),
+      destination: bookingData.destination,
+    })
     window.location.href = `/checkout?${params.toString()}`
   }
 

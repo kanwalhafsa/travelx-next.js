@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -41,11 +42,7 @@ export default function PackageDetailsPage() {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchPackage()
-  }, [params.id])
-
-  const fetchPackage = async () => {
+  const fetchPackage = useCallback(async () => {
     try {
       const packageId = Number(params.id)
 
@@ -184,7 +181,7 @@ export default function PackageDetailsPage() {
           rating: 4.6,
           reviews: 167,
           description:
-            "Relax on pristine beaches and explore tropical paradise. Island hop through the Caribbean's most beautiful destinations.",
+            "Relax on pristine beaches and explore tropical paradise. Island hop through the Caribbean\'s most beautiful destinations.",
           category: "Beach",
           includes: ["Beach resorts", "Island transfers", "Water activities", "Breakfast", "Snorkeling gear"],
           itinerary: [
@@ -242,7 +239,11 @@ export default function PackageDetailsPage() {
       console.error("Failed to fetch package:", error)
       setLoading(false)
     }
-  }
+  }, [params.id])
+
+  useEffect(() => {
+    fetchPackage()
+  }, [fetchPackage])
 
   const handleAddToWishlist = () => {
     setIsWishlisted(!isWishlisted)
@@ -254,14 +255,14 @@ export default function PackageDetailsPage() {
 
   const handleBookNow = () => {
     if (packageData) {
-      const bookingData = {
+      const bookingData: Record<string, string> = {
         type: "package",
         title: packageData.title,
         price: packageData.price.toString(),
         destination: packageData.destinations.join(", "),
       }
 
-      const params = new URLSearchParams(bookingData as any)
+      const params = new URLSearchParams(bookingData)
       window.location.href = `/checkout?${params.toString()}`
     }
   }

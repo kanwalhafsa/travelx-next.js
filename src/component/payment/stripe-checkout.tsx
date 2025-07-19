@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -54,7 +53,7 @@ export default function StripeCheckout({
         }),
       })
 
-      const { clientSecret, paymentIntentId } = await response.json()
+      const { paymentIntentId } = await response.json()
 
       // Simulate payment processing (replace with actual Stripe integration)
       await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -66,8 +65,8 @@ export default function StripeCheckout({
       })
 
       onSuccess?.(paymentIntentId)
-    } catch (error) {
-      const errorMessage = "Payment failed. Please try again."
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Payment failed. Please try again."
       toast({
         title: "Payment Failed",
         description: errorMessage,

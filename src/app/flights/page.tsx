@@ -25,6 +25,13 @@ interface Flight {
   aircraft: string
 }
 
+interface BookingData {
+  type: string
+  title: string
+  price: number
+  destination: string
+}
+
 export default function FlightsPage() {
   const [flights, setFlights] = useState<Flight[]>([])
   const [loading, setLoading] = useState(false)
@@ -81,21 +88,25 @@ export default function FlightsPage() {
 
   const handleSearch = async () => {
     setLoading(true)
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setFlights(mockFlights)
     setLoading(false)
   }
 
   const handleBookFlight = (flight: Flight) => {
-    const bookingData = {
+    const bookingData: BookingData = {
       type: "flight",
       title: `${flight.airline} ${flight.flightNumber}`,
       price: flight.price,
       destination: flight.to,
     }
 
-    const params = new URLSearchParams(bookingData as any)
+    const params = new URLSearchParams({
+      type: bookingData.type,
+      title: bookingData.title,
+      price: bookingData.price.toString(),
+      destination: bookingData.destination,
+    })
     window.location.href = `/checkout?${params.toString()}`
   }
 

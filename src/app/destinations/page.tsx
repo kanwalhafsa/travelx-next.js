@@ -1,6 +1,7 @@
+
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -32,127 +33,7 @@ export default function DestinationsPage() {
   const [sortBy, setSortBy] = useState("popular")
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchDestinations()
-  }, [])
-
-  useEffect(() => {
-    filterDestinations()
-  }, [destinations, searchTerm, selectedContinent, selectedCategory, sortBy])
-
-  const fetchDestinations = async () => {
-    try {
-      const response = await fetch("/api/destinations")
-      const data = await response.json()
-      setDestinations(data)
-      setLoading(false)
-    } catch (error) {
-      console.error("Failed to fetch destinations:", error)
-      // Fallback data
-      const fallbackData = [
-        {
-          id: 1,
-          name: "Bali",
-          country: "Indonesia",
-          continent: "Asia",
-          image: "/images/bali.jpeg?height=300&width=400&text=Bali",
-          price: "$899",
-          rating: 4.8,
-          reviews: 2847,
-          description: "Tropical paradise with stunning beaches",
-          category: "Beach",
-        },
-        {
-          id: 2,
-          name: "Tokyo",
-          country: "Japan",
-          continent: "Asia",
-          image: "/images/tokyo.jpg?height=300&width=400&text=Tokyo",
-          price: "$1299",
-          rating: 4.9,
-          reviews: 1923,
-          description: "Modern metropolis with rich culture",
-          category: "City",
-        },
-        {
-          id: 3,
-          name: "Santorini",
-          country: "Greece",
-          continent: "Europe",
-          image: "/images/greece.jpeg?height=300&width=400&text=Santorini",
-          price: "$1199",
-          rating: 4.7,
-          reviews: 1456,
-          description: "Iconic white buildings and blue domes",
-          category: "Beach",
-        },
-        {
-          id: 4,
-          name: "Dubai",
-          country: "UAE",
-          continent: "Asia",
-          image: "/images/dubai.jpeg?height=300&width=400&text=Dubai",
-          price: "$1599",
-          rating: 4.6,
-          reviews: 2134,
-          description: "Luxury shopping and modern architecture",
-          category: "City",
-        },
-        {
-          id: 5,
-          name: "Machu Picchu",
-          country: "Peru",
-          continent: "South America",
-          image: "/images/machu.jpeg?height=300&width=400&text=Machu+Picchu",
-          price: "$1899",
-          rating: 4.9,
-          reviews: 987,
-          description: "Ancient Incan citadel in the mountains",
-          category: "Cultural",
-        },
-        {
-          id: 6,
-          name: "Safari Kenya",
-          country: "Kenya",
-          continent: "Africa",
-          image: "/images/safari.jpeg?height=300&width=400&text=Safari",
-          price: "$2299",
-          rating: 4.8,
-          reviews: 756,
-          description: "Wildlife adventure in African savanna",
-          category: "Wildlife",
-        },
-        {
-          id: 7,
-          name: "Paris",
-          country: "France",
-          continent: "Europe",
-          image: "/images/paris.jpg?height=300&width=400&text=Paris",
-          price: "$1199",
-          rating: 4.7,
-          reviews: 4521,
-          description: "City of lights and romance",
-          category: "City",
-        },
-        {
-          id: 8,
-          name: "Maldives",
-          country: "Maldives",
-          continent: "Asia",
-          image: "/images/maldives.jpg?height=300&width=400&text=Maldives",
-          price: "$2599",
-          rating: 4.9,
-          reviews: 1876,
-          description: "Tropical paradise with overwater bungalows",
-          category: "Beach",
-        },
-      ]
-      setDestinations(fallbackData)
-      setLoading(false)
-    }
-  }
-
-  const filterDestinations = () => {
+  const filterDestinations = useCallback(() => {
     const filtered = destinations.filter((dest) => {
       const matchesSearch =
         dest.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -181,7 +62,127 @@ export default function DestinationsPage() {
     }
 
     setFilteredDestinations(filtered)
-  }
+  }, [destinations, searchTerm, selectedContinent, selectedCategory, sortBy])
+
+  const fetchDestinations = useCallback(async () => {
+    try {
+      const response = await fetch("/api/destinations")
+      const data = await response.json()
+      setDestinations(data)
+      setLoading(false)
+    } catch (err) {
+      console.error("Failed to fetch destinations:", err)
+      // Fallback data
+      const fallbackData = [
+        {
+          id: 1,
+          name: "Bali",
+          country: "Indonesia",
+          continent: "Asia",
+          image: "/images/bali.jpeg?height=300&width=400",
+          price: "$899",
+          rating: 4.8,
+          reviews: 2847,
+          description: "Tropical paradise with stunning beaches",
+          category: "Beach",
+        },
+        {
+          id: 2,
+          name: "Tokyo",
+          country: "Japan",
+          continent: "Asia",
+          image: "/images/tokyo.jpg?height=300&width=400",
+          price: "$1299",
+          rating: 4.9,
+          reviews: 1923,
+          description: "Modern metropolis with rich culture",
+          category: "City",
+        },
+        {
+          id: 3,
+          name: "Santorini",
+          country: "Greece",
+          continent: "Europe",
+          image: "/images/greece.jpeg?height=300&width=400",
+          price: "$1199",
+          rating: 4.7,
+          reviews: 1456,
+          description: "Iconic white buildings and blue domes",
+          category: "Beach",
+        },
+        {
+          id: 4,
+          name: "Dubai",
+          country: "UAE",
+          continent: "Asia",
+          image: "/images/dubai.jpeg?height=300&width=400",
+          price: "$1599",
+          rating: 4.6,
+          reviews: 2134,
+          description: "Luxury shopping and modern architecture",
+          category: "City",
+        },
+        {
+          id: 5,
+          name: "Machu Picchu",
+          country: "Peru",
+          continent: "South America",
+          image: "/images/machu.jpeg?height=300&width=400",
+          price: "$1899",
+          rating: 4.9,
+          reviews: 987,
+          description: "Ancient Incan citadel in the mountains",
+          category: "Cultural",
+        },
+        {
+          id: 6,
+          name: "Safari Kenya",
+          country: "Kenya",
+          continent: "Africa",
+          image: "/images/safari.jpeg?height=300&width=400",
+          price: "$2299",
+          rating: 4.8,
+          reviews: 756,
+          description: "Wildlife adventure in African savanna",
+          category: "Wildlife",
+        },
+        {
+          id: 7,
+          name: "Paris",
+          country: "France",
+          continent: "Europe",
+          image: "/images/paris.jpg?height=300&width=400",
+          price: "$1199",
+          rating: 4.7,
+          reviews: 4521,
+          description: "City of lights and romance",
+          category: "City",
+        },
+        {
+          id: 8,
+          name: "Maldives",
+          country: "Maldives",
+          continent: "Asia",
+          image: "/images/maldives.jpg?height=300&width=400",
+          price: "$2599",
+          rating: 4.9,
+          reviews: 1876,
+          description: "Tropical paradise with overwater bungalows",
+          category: "Beach",
+        },
+      ]
+      setDestinations(fallbackData)
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchDestinations()
+  }, [fetchDestinations])
+
+  useEffect(() => {
+    filterDestinations()
+  }, [filterDestinations])
 
   const continents = ["all", "Asia", "Europe", "Africa", "North America", "South America", "Oceania"]
   const categories = ["all", "Beach", "City", "Cultural", "Wildlife", "Adventure"]
@@ -193,7 +194,7 @@ export default function DestinationsPage() {
           <div className="animate-pulse">
             <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
+              {[...Array(8)].map((_, i) => (
                 <div key={i} className="bg-white rounded-lg h-96"></div>
               ))}
             </div>

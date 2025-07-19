@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -147,8 +148,7 @@ export default function RefundPage() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Refund Policy</h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We understand that travel plans can change. Here's everything you need to know about our refund policies for
-            different types of bookings.
+            {"We understand that travel plans can change. Here's everything you need to know about our refund policies for different types of bookings."}
           </p>
         </div>
 
@@ -268,7 +268,7 @@ export default function RefundPage() {
           <CardContent className="p-8 text-center">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Questions about refunds?</h3>
             <p className="text-gray-600 mb-6">
-              Our customer support team is here to help you understand our refund policies and process your requests.
+              {"Our customer support team is here to help you understand our refund policies and process your requests."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-gradient-to-r from-blue-600 to-purple-600" asChild>

@@ -48,7 +48,7 @@ export default function ContactPage() {
       if (response.ok) {
         toast({
           title: "Message Sent!",
-          description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+          description: "Thank you for contacting us. We will get back to you within 24 hours.",
         })
 
         // Reset form
@@ -63,7 +63,8 @@ export default function ContactPage() {
       } else {
         throw new Error("Failed to send message")
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Contact form error:", err)
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
@@ -81,7 +82,7 @@ export default function ContactPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions about your travel plans? We're here to help! Get in touch with our travel experts.
+            Have questions about your travel plans? We&apos;re here to help! Get in touch with our travel experts.
           </p>
         </div>
 
@@ -91,7 +92,7 @@ export default function ContactPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
-                <CardDescription>We're here to help with all your travel needs</CardDescription>
+                <CardDescription>We&apos;re here to help with all your travel needs</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-3">
@@ -160,7 +161,7 @@ export default function ContactPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
-                <CardDescription>Fill out the form below and we'll get back to you soon</CardDescription>
+                <CardDescription>Fill out the form below and we will get back to you soon</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">

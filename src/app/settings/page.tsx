@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -114,8 +115,8 @@ export default function SettingsPage() {
       }
       setUser(mockUser)
       setLoading(false)
-    } catch (error) {
-      console.error("Failed to fetch user data:", error)
+    } catch {
+      console.error("Failed to fetch user data")
       setLoading(false)
     }
   }
@@ -144,8 +145,8 @@ export default function SettingsPage() {
         },
       ]
       setPaymentMethods(mockPaymentMethods)
-    } catch (error) {
-      console.error("Failed to fetch payment methods:", error)
+    } catch {
+      console.error("Failed to fetch payment methods")
     }
   }
 
@@ -156,7 +157,7 @@ export default function SettingsPage() {
         title: "Profile Updated",
         description: "Your profile has been updated successfully.",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to update profile. Please try again.",
@@ -185,7 +186,7 @@ export default function SettingsPage() {
         newPassword: "",
         confirmPassword: "",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to change password. Please try again.",

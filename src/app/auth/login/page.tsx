@@ -48,6 +48,7 @@ export default function LoginPage() {
           variant: "destructive",
         })
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
       toast({
         title: "Error",

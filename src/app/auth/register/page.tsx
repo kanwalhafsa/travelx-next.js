@@ -86,7 +86,8 @@ export default function RegisterPage() {
           variant: "destructive",
         })
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Registration error:", err)
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",

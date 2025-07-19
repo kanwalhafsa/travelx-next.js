@@ -57,7 +57,8 @@ export async function POST(request: NextRequest) {
     userStore.push(newUser)
 
     // Return success response (without password)
-    const { password: _password, ...userWithoutPassword } = newUser
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = newUser
     return NextResponse.json(
       {
         message: "User created successfully",
@@ -65,8 +66,8 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 },
     )
-  } catch (error) {
-    console.error("Registration error:", error)
+  } catch (err) {
+    console.error("Registration error:", err)
     return NextResponse.json({ message: "Internal server error" }, { status: 500 })
   }
 }

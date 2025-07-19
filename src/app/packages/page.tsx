@@ -1,6 +1,7 @@
+
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -36,13 +37,47 @@ export default function PackagesPage() {
   const [sortBy, setSortBy] = useState("popular")
   const [loading, setLoading] = useState(true)
 
+  const filterPackages = useCallback(() => {
+    const filtered = packages.filter((pkg) => {
+      const matchesSearch =
+        pkg.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pkg.destinations.some((dest) => dest.toLowerCase().includes(searchTerm.toLowerCase()))
+      const matchesCategory = selectedCategory === "all" || pkg.category === selectedCategory
+      const matchesDuration = selectedDuration === "all" || getDurationCategory(pkg.duration) === selectedDuration
+
+      return matchesSearch && matchesCategory && matchesDuration
+    })
+
+    // Sort packages
+    switch (sortBy) {
+      case "price-low":
+        filtered.sort((a, b) => a.price - b.price)
+        break
+      case "price-high":
+        filtered.sort((a, b) => b.price - b.price)
+        break
+      case "rating":
+        filtered.sort((a, b) => b.rating - a.rating)
+        break
+      case "duration":
+        filtered.sort((a, b) => Number.parseInt(a.duration) - Number.parseInt(b.duration))
+        break
+      case "popular":
+      default:
+        filtered.sort((a, b) => b.reviews - a.reviews)
+        break
+    }
+
+    setFilteredPackages(filtered)
+  }, [packages, searchTerm, selectedCategory, selectedDuration, sortBy])
+
   useEffect(() => {
     fetchPackages()
   }, [])
 
   useEffect(() => {
     filterPackages()
-  }, [packages, searchTerm, selectedCategory, selectedDuration, sortBy])
+  }, [filterPackages])
 
   const fetchPackages = async () => {
     try {
@@ -154,40 +189,6 @@ export default function PackagesPage() {
       setPackages(fallbackData)
       setLoading(false)
     }
-  }
-
-  const filterPackages = () => {
-    const filtered = packages.filter((pkg) => {
-      const matchesSearch =
-        pkg.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pkg.destinations.some((dest) => dest.toLowerCase().includes(searchTerm.toLowerCase()))
-      const matchesCategory = selectedCategory === "all" || pkg.category === selectedCategory
-      const matchesDuration = selectedDuration === "all" || getDurationCategory(pkg.duration) === selectedDuration
-
-      return matchesSearch && matchesCategory && matchesDuration
-    })
-
-    // Sort packages
-    switch (sortBy) {
-      case "price-low":
-        filtered.sort((a, b) => a.price - b.price)
-        break
-      case "price-high":
-        filtered.sort((a, b) => b.price - a.price)
-        break
-      case "rating":
-        filtered.sort((a, b) => b.rating - a.rating)
-        break
-      case "duration":
-        filtered.sort((a, b) => Number.parseInt(a.duration) - Number.parseInt(b.duration))
-        break
-      case "popular":
-      default:
-        filtered.sort((a, b) => b.reviews - a.reviews)
-        break
-    }
-
-    setFilteredPackages(filtered)
   }
 
   const getDurationCategory = (duration: string) => {

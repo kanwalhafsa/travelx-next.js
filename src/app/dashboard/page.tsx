@@ -1,6 +1,7 @@
+
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -8,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MapPin, Calendar, CreditCard, Heart, Settings, Plane, Hotel, Star, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 interface UserData {
@@ -38,12 +40,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  useEffect(() => {
-    fetchUserData()
-    fetchBookings()
-  }, [])
-
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     try {
       const response = await fetch("/api/auth/me")
       if (response.ok) {
@@ -58,13 +55,13 @@ export default function DashboardPage() {
       } else {
         router.push("/auth/login")
       }
-    } catch (error) {
-      console.error("Failed to fetch user data:", error)
+    } catch (err) {
+      console.error("Failed to fetch user data:", err)
       router.push("/auth/login")
     }
-  }
+  }, [router])
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     try {
       // Mock bookings data
       const mockBookings: Booking[] = [
@@ -101,11 +98,16 @@ export default function DashboardPage() {
       ]
       setBookings(mockBookings)
       setLoading(false)
-    } catch (error) {
-      console.error("Failed to fetch bookings:", error)
+    } catch (err) {
+      console.error("Failed to fetch bookings:", err)
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    fetchUserData()
+    fetchBookings()
+  }, [fetchUserData, fetchBookings])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -255,10 +257,12 @@ export default function DashboardPage() {
                       key={booking.id}
                       className="flex items-center space-x-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                      <img
+                      <Image
                         src={booking.image || "/placeholder.svg"}
                         alt={booking.title}
-                        className="w-16 h-16 rounded-lg object-cover"
+                        width={64}
+                        height={64}
+                        className="rounded-lg object-cover"
                       />
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-1">
@@ -300,7 +304,7 @@ export default function DashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Favorite Destinations</CardTitle>
-                <CardDescription>Places you've saved for future trips</CardDescription>
+                <CardDescription>Places you&apos;ve saved for future trips</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -310,9 +314,11 @@ export default function DashboardPage() {
                     { name: "Santorini, Greece", image: "/images/greece3.jpg?height=150&width=200" },
                   ].map((destination, index) => (
                     <div key={index} className="relative group cursor-pointer">
-                      <img
+                      <Image
                         src={destination.image || "/placeholder.svg"}
                         alt={destination.name}
+                        width={200}
+                        height={150}
                         className="w-full h-32 rounded-lg object-cover group-hover:scale-105 transition-transform"
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-40 rounded-lg flex items-end p-3">

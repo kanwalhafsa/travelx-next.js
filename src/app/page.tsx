@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react"
@@ -310,7 +311,7 @@ export default function HomePage() {
                       </Select>
                     </div>
                   </div>
-        
+
                   <Button
                     className="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                     size="lg"
@@ -350,7 +351,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
-            <p className="text-lg text-gray-600">Discover the world's most amazing places</p>
+            <p className="text-lg text-gray-600">{"Discover the world's most amazing places"}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

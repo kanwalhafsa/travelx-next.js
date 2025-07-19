@@ -41,7 +41,7 @@ export default function FAQPage() {
       id: 4,
       question: "How can I modify my existing booking?",
       answer:
-        "You can modify your booking through your account dashboard or by contacting our customer support team. Modification fees may apply depending on the supplier's terms.",
+        "You can modify your booking through your account dashboard or by contacting our customer support team. Modification fees may apply depending on the supplier&apos;s terms.",
       category: "booking",
     },
     {
@@ -76,7 +76,7 @@ export default function FAQPage() {
       id: 9,
       question: "What happens if my flight is cancelled?",
       answer:
-        "If your flight is cancelled, we'll work with the airline to rebook you on the next available flight at no extra cost. If no suitable alternative is available, you'll receive a full refund.",
+        "If your flight is cancelled, we&apos;ll work with the airline to rebook you on the next available flight at no extra cost. If no suitable alternative is available, you&apos;ll receive a full refund.",
       category: "support",
     },
     {
@@ -135,7 +135,7 @@ export default function FAQPage() {
           <CardContent className="p-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Still have questions?</h2>
             <p className="text-gray-600 mb-6">
-              Can't find what you're looking for? Our customer support team is here to help.
+              Can&apos;t find what you&apos;re looking for? Our customer support team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600">
