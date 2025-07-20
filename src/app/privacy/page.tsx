@@ -124,23 +124,21 @@ export default function PrivacyPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>6. Children's Privacy</CardTitle>
+              <CardTitle>6. Children&#39;s Privacy</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-gray max-w-none">
-              // Test comment to verify file update
+              {/* Test comment to verify file update */}
               <p>
-                Our services are not intended for children under 13. We don&apos;t knowingly collect personal information from
-                children under 13. If we become aware of such collection, we will delete the information immediately.
+                {"Our services are not intended for children under 13. We don't knowingly collect personal information from children under 13. If we become aware of such collection, we will delete the information immediately."}
               </p>
               <p>
-                If you&apos;re a parent or guardian and believe your child has provided us with personal information, please
-                contact us immediately.
+                {"If you're a parent or guardian and believe your child has provided us with personal information, please contact us immediately."}
               </p>
               <p>
-                We&apos;ll take prompt action to investigate and remove any such data from our systems.
+                {"We'll take prompt action to investigate and remove any such data from our systems."}
               </p>
               <p>
-                It&apos;s our priority to ensure compliance with all applicable child protection laws.
+                {"It's our priority to ensure compliance with all applicable child protection laws."}
               </p>
             </CardContent>
           </Card>
